@@ -1,0 +1,47 @@
+---
+title: "Expand Archaeological Data"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+## Including Code
+
+You can include R code in the document as follows:
+
+```{r cars, warning=FALSE}
+library(tidyverse)
+library(forcats)
+library(data.table)
+library(DescTools)
+```
+
+## This is a Project that is Intended to Expand the USe of Open Data in Paleolithci Research
+
+The following code snippets are focused on trying to exapnd the use of avaialble data in Paleolithic research. These blocks of core are focused on providing an example of the kind of data available. 
+
+```{r Rezek, warning=FALSE}
+
+rezek <- fread('https://static-content.springer.com/esm/art%3A10.1038%2Fs41559-018-0488-4/MediaObjects/41559_2018_488_MOESM3_ESM.csv')
+head(rezek)
+
+Desc(rezek)
+
+
+```
+## Reti 
+
+Reti published both archaeological and experimental data sets in 
+
+
+
+
+
+
+
