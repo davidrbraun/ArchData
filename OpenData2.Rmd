@@ -18,6 +18,7 @@ library(tidyverse)
 library(forcats)
 library(data.table)
 library(DescTools)
+library(googlesheets4)
 ```
 
 ## This is a Project that is Intended to Expand the Use of Open Data in Paleolithic Research
@@ -46,8 +47,17 @@ Reti published both archaeological and experimental data sets in
 
 
 ```{r, Reti data set }
+#to get this data it is necessary to make sure you have googlesheets4 installed 
 
-Reti<-fread('https://figshare.com/articles/Reti_PLOS_ONE_Data_xlsx')
+#First we need to make the id of the gogole sheet into a vector
+
+id_Reti <- "1h--GxB-4RAERvZocrkhJi5xPkU6OjTFW8JVAb9B-_oA"
+
+#then load the sheet
+
+Reti<-read_sheet(id_Reti)
+
+Desc(Reti)
 
 
 ```
