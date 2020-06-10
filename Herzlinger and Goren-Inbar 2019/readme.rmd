@@ -1,0 +1,76 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rgl)
+library(Rvcg)
+library(R.matlab)
+library(ggplot2)
+library(png)
+library(grid)
+library(gridExtra)
+
+```
+
+## Herzlinger and Goren-Inbar 2019 - Handaxe 3D models and analysis
+
+```{r load_and_convert_data}
+
+# To run this code, first down load the zip file containing the 3D models from this page
+# https://osf.io/u3n9k/
+# Next, unzip the files to a folder called data.
+# This code will then loop through that folder and convert each file to a ply type.
+
+for (filename in list.files('data', pattern = '*.3dl')) {
+  new_filename = paste('data/', strsplit(filename,'\\.')[[1]][1], '.ply', sep = '')
+  if (!file.exists(new_filename)) {
+    biface_matlab_format = readMat(paste('data', filename, sep = '//'))
+    biface = tmesh3d(vertices = t(biface_matlab_format$v),
+                     indices = t(biface_matlab_format$f),
+                     homogeneous = FALSE)
+    vcgPlyWrite(biface, new_filename)
+  }
+}
+
+```
+
+Make a view of each and save as a PNG file.
+
+```{r make_png_of_each}
+
+open3d()
+for (filename in list.files('data', pattern = '*.ply')) {
+  new_filename = paste('data/', strsplit(filename,'\\.')[[1]][1], '.png', sep = '')
+  if (!file.exists(new_filename)) {
+    biface = vcgPlyRead(paste('data', filename, sep = '//'))
+    clear3d()
+    shade3d(biface, color = '#FFD54F')
+    snapshot3d(new_filename)
+  }
+}
+rgl.close()
+
+```
+
+Now display them.
+
+```{r plot_handaxes, fig.width = 2, fig.height = 2}
+
+par(mfrow=c(10,10))
+
+for (filename in list.files('data', pattern = '*.png')) {
+  img <- readPNG(paste('data', filename, sep = '/')) 
+  g <- rasterGrob(img, interpolate=TRUE) 
+  p = ggplot(data.frame(x = 1:25, y = 1:25), aes(x, y))
+  p = p + annotation_custom(g, xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf)
+  p = p + xlab('') + ylab('')
+  p = p + ggtitle(filename)
+  p = p + theme_minimal()
+  print(p)
+}
+
+```
+
