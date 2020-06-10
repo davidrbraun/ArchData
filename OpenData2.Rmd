@@ -19,6 +19,7 @@ library(forcats)
 library(data.table)
 library(DescTools)
 library(googlesheets4)
+library(readxl)
 ```
 
 ## This is a Project that is Intended to Expand the Use of Open Data in Paleolithic Research
@@ -26,7 +27,7 @@ library(googlesheets4)
 The following code snippets are focused on trying to exapnd the use of avaialble data in Paleolithic research. These blocks of core are focused on providing an example of the kind of data available. 
 
 ##Rezek
-###In 2018 Rezeke published a large data set of flakes from various contexts to investigate patterns over the course of 2 million years. 
+###In 2018 Rezek published a large data set of flakes from various contexts to investigate patterns over the course of 2 million years. 
 
 The abstract for this paper reads as follows:
 
@@ -43,7 +44,7 @@ Desc(rezek)
 ```
 ## Reti 
 
-Reti published both archaeological and experimental data sets in 
+Reti 2015 published both archaeological and experimental data sets. These provide a vareity of variables for whole flakes. 
 
 
 ```{r, Reti data set }
@@ -51,11 +52,15 @@ Reti published both archaeological and experimental data sets in
 
 #First we need to make the id of the gogole sheet into a vector
 
-id_Reti <- "1h--GxB-4RAERvZocrkhJi5xPkU6OjTFW8JVAb9B-_oA"
+#id_Reti <- "1h--GxB-4RAERvZocrkhJi5xPkU6OjTFW8JVAb9B-_oA"
 
 #then load the sheet
 
-Reti<-read_sheet(id_Reti)
+#Ok we still need to work on how do we get data from googlesheets. I can't knit this becasue it requests access to my ggogledrive each time. That won't work. 
+
+#Reti<-read_sheet(id_Reti)
+
+Reti<-read_xlsx("RetiPLOSONEData.xlsx")
 
 Desc(Reti)
 
