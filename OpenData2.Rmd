@@ -64,7 +64,19 @@ Reti<-read_xlsx("RetiPLOSONEData.xlsx")
 
 Desc(Reti)
 
+```
+###Mraz et al. 20202
+
+
+```{r, Mraz, echo=FALSE}
+
+Mraz <- read.csv(url("https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-019-51139-3/MediaObjects/41598_2019_51139_MOESM2_ESM.csv"))
+
+Desc(Mraz)
 
 ```
+
+
+
 
 
