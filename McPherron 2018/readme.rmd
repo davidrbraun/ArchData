@@ -1,8 +1,6 @@
 ---
-title: "McPherron 2018"
-author: "Shannon P. McPherron"
-date: "6/10/2020"
-output: html_document
+output: github_document
+bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -15,13 +13,18 @@ library(ggplot2)
 
 ## McPherron 2018 - Orientation data from La Ferrassie
 
+This code fetches a dataset of XYZ coordinate pairs for lithic and bone data from the recent excavations of La Ferrassie, France.  These data were published in the supplemental information of [@mcpherron_additional_2018].
 
 ```{r load_data}
 
-url = "https://doi.org/10.1371/journal.pone.0190195.s002"
-GET(url, write_disk(tf <- tempfile(fileext = ".RDS")))
-mcpherron_2018 = readRDS(tf)
-saveRDS(mcpherron_2018, 'mcpherron_2018.RDS')
+if (!file.exists('mcpherron_2018.rds')) {
+  url = "https://doi.org/10.1371/journal.pone.0190195.s002"
+  GET(url, write_disk(tf <- tempfile(fileext = ".RDS")))
+  mcpherron_2018 = readRDS(tf)
+  saveRDS(mcpherron_2018, 'mcpherron_2018.RDS') 
+} else {
+  mcpherron_2018 = readRDS('mcpherron_2018.RDS')
+}
 
 ```
 
