@@ -24,6 +24,13 @@ library(DescTools)
 
 The following code snippets are focused on trying to exapnd the use of avaialble data in Paleolithic research. These blocks of core are focused on providing an example of the kind of data available. 
 
+##Rezek
+###In 2018 Rezeke published a large data set of flakes from various contexts to investigate patterns over the course of 2 million years. 
+
+The abstract for this paper reads as follows:
+
+Temporal variability in flaking stone has been used as one of the currencies for hominin behavioural and biological evolution. This variability is usually traced through changes in artefact forms and techniques of production, resulting overall in unilineal and normative models of hominin adaptation. Here, we focus on the fundamental purpose of flaking stone—the production of a sharp working edge—and model this behaviour over evolutionary time to reassess the evolutionary efficiency of stone tool technology. Using more than 18,000 flakes from 81 assemblages spanning two million years, we show that greater production of sharp edges was followed by increased variability in this behaviour. We propose that a diachronic increase in this variability was related to a higher intensity of interrelations between different behaviours involving the use and management of stone resources that gave fitness advantages in particular environmental contexts. 
+
 ```{r Rezek, warning=FALSE}
 
 rezek <- fread('https://static-content.springer.com/esm/art%3A10.1038%2Fs41559-018-0488-4/MediaObjects/41559_2018_488_MOESM3_ESM.csv')
@@ -38,8 +45,11 @@ Desc(rezek)
 Reti published both archaeological and experimental data sets in 
 
 
+```{r, Reti data set }
+
+Reti<-fread('https://figshare.com/articles/Reti_PLOS_ONE_Data_xlsx')
 
 
-
+```
 
 
