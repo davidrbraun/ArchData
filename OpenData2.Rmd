@@ -11,18 +11,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
 
-## Including Code
+## Add needed libraries
 
-You can include R code in the document as follows:
-
-```{r cars, warning=FALSE}
+```{r adding libraries, warning=FALSE}
 library(tidyverse)
 library(forcats)
 library(data.table)
 library(DescTools)
 ```
 
-## This is a Project that is Intended to Expand the USe of Open Data in Paleolithci Research
+## This is a Project that is Intended to Expand the Use of Open Data in Paleolithic Research
 
 The following code snippets are focused on trying to exapnd the use of avaialble data in Paleolithic research. These blocks of core are focused on providing an example of the kind of data available. 
 
