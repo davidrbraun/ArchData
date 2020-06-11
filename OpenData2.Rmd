@@ -62,7 +62,7 @@ Reti 2015 published both archaeological and experimental data sets. These provid
 
 Reti<-read_xlsx("RetiPLOSONEData.xlsx")
 
-Desc(Reti)
+Desc (Reti)
 
 ```
 ###Mraz et al. 20202
