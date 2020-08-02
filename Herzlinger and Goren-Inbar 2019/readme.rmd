@@ -3,10 +3,11 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
 
 library(rgl)
 library(Rvcg)
+library(Morpho)
 library(R.matlab)
 library(ggplot2)
 library(png)
@@ -27,10 +28,16 @@ library(gridExtra)
 for (filename in list.files('data', pattern = '*.3dl')) {
   new_filename = paste('data/', strsplit(filename,'\\.')[[1]][1], '.ply', sep = '')
   if (!file.exists(new_filename)) {
+    
+    # Read the MatLab format file
     biface_matlab_format = readMat(paste('data', filename, sep = '//'))
+    
+    # Convert to a more standardized formet
     biface = tmesh3d(vertices = t(biface_matlab_format$v),
                      indices = t(biface_matlab_format$f),
                      homogeneous = FALSE)
+	  
+    # Save the result at a PLY
     vcgPlyWrite(biface, new_filename)
   }
 }
@@ -41,14 +48,35 @@ Make a view of each and save as a PNG file.
 
 ```{r make_png_of_each}
 
+# use rgl to render each handaxe, rotate it appropriately.  Note this routine does not
+# generate proper png files if the documented is knitted.  Instead, just run this code
+# block.
+
 open3d()
 for (filename in list.files('data', pattern = '*.ply')) {
   new_filename = paste('data/', strsplit(filename,'\\.')[[1]][1], '.png', sep = '')
   if (!file.exists(new_filename)) {
     biface = vcgPlyRead(paste('data', filename, sep = '//'))
+
+    # Do PCA on the vertices to achieve a more standard orientation
+	  v = princomp(t(biface$vb[1:3,]), scores = TRUE, cor = FALSE)$scores
+	  
+	  # Put the PCA scores back in the mesh object along with the texture
+    biface$vb[,] = t(cbind(v, biface$vb[4,]))							
+	
+	  # Rotate into standard view
+    biface = rotaxis3d(biface, c(0, 0, 0), c(0, 1, 0), -pi / 2)
+    biface = rotaxis3d(biface, c(0, 0, 0), c(0, 0, 1), -pi / 2)
+
+    # Check to see if it looks to be upside down and flip if so
+    if (sd(biface$vb[1,biface$vb[3,]<0]) < sd(biface$vb[1,biface$vb[3,]>0])) {
+  	  biface = rotaxis3d(biface, c(0,0,0), c(1,0,0), pi) }		
+
     clear3d()
+    
     shade3d(biface, color = '#FFD54F')
-    snapshot3d(new_filename)
+    
+    snapshot3d(new_filename, fmt = 'png')
   }
 }
 rgl.close()
