@@ -1,0 +1,37 @@
+---
+title: "Reti 2015"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Reti 2015
+
+Reti 2015 published both archaeological and experimental data sets. These provide a vareity of variables for whole flakes. 
+
+
+```{r, Reti data set }
+#to get this data it is necessary to make sure you have googlesheets4 installed 
+
+#First we need to make the id of the gogole sheet into a vector
+
+#id_Reti <- "1h--GxB-4RAERvZocrkhJi5xPkU6OjTFW8JVAb9B-_oA"
+
+
+Reti<-read_xlsx("RetiPLOSONEData.xlsx")
+
+```
+
+
+#Dataset
+
+The dataset includes number of variables on flakes from experimental and archaeological data 
+
+```{r, data for Reti, echo=FALSE}
+Desc(Reti)
+
+
+```

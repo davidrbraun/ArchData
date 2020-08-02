@@ -24,7 +24,7 @@ library(readxl)
 
 ## This is a Project that is Intended to Expand the Use of Open Data in Paleolithic Research
 
-The following code snippets are focused on trying to exapnd the use of avaialble data in Paleolithic research. These blocks of core are focused on providing an example of the kind of data available. 
+The following code snippets are focused on trying to expand the use of avaialble data in Paleolithic research. These blocks of code are focused on providing an example of the kind of data available. They also provide the code necessary to immediatley begin working with this data.
 
 ##Rezek
 ###In 2018 Rezek published a large data set of flakes from various contexts to investigate patterns over the course of 2 million years. 
@@ -65,7 +65,7 @@ Reti<-read_xlsx("RetiPLOSONEData.xlsx")
 Desc (Reti)
 
 ```
-###Mraz et al. 20202
+###Mraz et al. 2020
 
 
 ```{r, Mraz, echo=FALSE}
