@@ -3,7 +3,9 @@
 
 This code fetches a dataset of XYZ coordinate pairs for lithic and bone
 data from the recent excavations of La Ferrassie, France. These data
-were published in the supplemental information of (McPherron 2018).
+were published in the supplemental information of McPherron (2018). For
+more on how to use these data and code refer to that same publication
+and this [GitHub site](https://github.com/surf3s/Orientations).
 
 ``` r
 if (!file.exists('mcpherron_2018.rds')) {

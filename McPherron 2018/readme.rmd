@@ -13,7 +13,7 @@ library(ggplot2)
 
 ## McPherron 2018 - Orientation data from La Ferrassie
 
-This code fetches a dataset of XYZ coordinate pairs for lithic and bone data from the recent excavations of La Ferrassie, France.  These data were published in the supplemental information of [@mcpherron_additional_2018].
+This code fetches a dataset of XYZ coordinate pairs for lithic and bone data from the recent excavations of La Ferrassie, France.  These data were published in the supplemental information of @mcpherron_additional_2018.  For more on how to use these data and code refer to that same publication and this [GitHub site](https://github.com/surf3s/Orientations).
 
 ```{r load_data}
 
