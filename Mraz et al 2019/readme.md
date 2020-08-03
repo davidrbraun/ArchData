@@ -10,13 +10,16 @@ differently by looking at the effect of heating on the force required to
 remove a flake of a given mass.
 
 ``` r
-if (!file.exists('mraz_2020.rds')) {
+library(httr)
+library(ggplot2)
+
+if (!file.exists('data/mraz_2020.rds')) {
   url = "https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-019-51139-3/MediaObjects/41598_2019_51139_MOESM3_ESM.csv"
   GET(url, write_disk(tf <- tempfile(fileext = ".csv")))
   mraz_2020 = read.csv(tf)
-  saveRDS(mraz_2020, 'mraz_2020.RDS') 
+  saveRDS(mraz_2020, 'data/mraz_2020.rds') 
 } else {
-  mraz_2020 = readRDS('mraz_2020.RDS')
+  mraz_2020 = readRDS('data/mraz_2020.rds')
 }
 ```
 

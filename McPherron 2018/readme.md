@@ -8,6 +8,9 @@ more on how to use these data and code refer to that same publication
 and this [GitHub site](https://github.com/surf3s/Orientations).
 
 ``` r
+library(httr)
+library(ggplot2)
+
 if (!file.exists('mcpherron_2018.rds')) {
   url = "https://doi.org/10.1371/journal.pone.0190195.s002"
   GET(url, write_disk(tf <- tempfile(fileext = ".RDS")))

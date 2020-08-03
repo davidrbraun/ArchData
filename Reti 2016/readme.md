@@ -2,11 +2,10 @@
 ## Reti 2016
 
 Reti (2016) published both an Oldowan archaeological data set and an
-experimental data set. This data set can be found on this
-[figshare](https://figshare.com/articles/Reti_PLOS_ONE_Data_xlsx/2056551/1)
-page and downloaded as an Excel file. The data include a variety of
-variables for whole flakes, including detailed measurements of flake
-platforms.
+experimental data set. This data set can be found on this [figshare
+page](https://figshare.com/articles/Reti_PLOS_ONE_Data_xlsx/2056551/1)
+and downloaded as an Excel file. The data include a variety of variables
+for whole flakes, including detailed measurements of flake platforms.
 
 ``` r
 library(readxl)

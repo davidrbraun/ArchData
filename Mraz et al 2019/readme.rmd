@@ -4,10 +4,8 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 
-library(httr)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ```
 
@@ -16,6 +14,9 @@ library(ggplot2)
 This code fetches a dataset from a controlled experiment to test the effect of heating raw materials on the force required to remove a flake.  The Open Access publication [@mraz_thermal_2019] includes a data set on flakes and on the cores plus some R code to analyze the data and plot the results.  Here we load the flake data and present the data slightly differently by looking at the effect of heating on the force required to remove a flake of a given mass.
 
 ```{r load_data}
+
+library(httr)
+library(ggplot2)
 
 if (!file.exists('data/mraz_2020.rds')) {
   url = "https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-019-51139-3/MediaObjects/41598_2019_51139_MOESM3_ESM.csv"
