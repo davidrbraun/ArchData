@@ -4,10 +4,8 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 
-library(httr)
-library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ```
 
@@ -16,6 +14,9 @@ library(ggplot2)
 This code fetches a dataset of XYZ coordinate pairs for lithic and bone data from the recent excavations of La Ferrassie, France.  These data were published in the supplemental information of @mcpherron_additional_2018.  For more on how to use these data and code refer to that same publication and this [GitHub site](https://github.com/surf3s/Orientations).
 
 ```{r load_data}
+
+library(httr)
+library(ggplot2)
 
 if (!file.exists('mcpherron_2018.rds')) {
   url = "https://doi.org/10.1371/journal.pone.0190195.s002"

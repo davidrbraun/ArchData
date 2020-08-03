@@ -3,7 +3,14 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = FALSE)
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+## Herzlinger and Goren-Inbar 2019 - Handaxe 3D models and analysis
+
+```{r load_and_convert_data}
 
 library(rgl)
 library(Rvcg)
@@ -13,12 +20,6 @@ library(ggplot2)
 library(png)
 library(grid)
 library(gridExtra)
-
-```
-
-## Herzlinger and Goren-Inbar 2019 - Handaxe 3D models and analysis
-
-```{r load_and_convert_data}
 
 # To run this code, first down load the zip file containing the 3D models from this page
 # https://osf.io/u3n9k/
