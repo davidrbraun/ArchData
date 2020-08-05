@@ -1,5 +1,6 @@
 ---
 output: github_document
+bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -9,6 +10,10 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ## Herzlinger and Goren-Inbar 2019 - Beyond a Cutting Edge: a Morpho-technological Analysis of Acheulian Handaxes and Cleavers from Gesher Benot Ya‘aqov, Israel
+
+@herzlinger_beyond_2020 published on the handaxes and cleavers from Gesher Benot Ya‘aqov, Israel, in the *Journal of Paleolithic Archaeology* and placed all of the data on [OSF](https://osf.io/u3n9k/). The data include 3D models of all of the artifacts and a  spreadsheet of attribute values for each including the number of dorsal and ventral scars and the type of blank.  For the 3D models, the data format is something called .3dl which is compatible with the software program AGMT3-D, which was published by in open access by [Gadi Herzlinger and Leore Grosman on PLOS One](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0207890) and is freely available for download.
+
+We wondered if the data could be used outside of this program by converting the format to something more standard like PLY. In fact, the files are in a standard Matlab format that R can be used to easily convert them. So the code that follows loads each artifact, coverts it to a PLY, saves the file, and then makes a 2D snapshot of each (after rotating them).
 
 ```{r load_and_convert_data}
 
