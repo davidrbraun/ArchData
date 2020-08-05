@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ```
 
-## Herzlinger and Goren-Inbar 2019 - Handaxe 3D models and analysis
+## Herzlinger and Goren-Inbar 2019 - Beyond a Cutting Edge: a Morpho-technological Analysis of Acheulian Handaxes and Cleavers from Gesher Benot Ya‘aqov, Israel
 
 ```{r load_and_convert_data}
 
