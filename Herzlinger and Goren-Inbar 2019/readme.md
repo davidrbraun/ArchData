@@ -1,7 +1,16 @@
 
-## Herzlinger and Goren-Inbar 2019 - Handaxe 3D models and analysis
+## Herzlinger and Goren-Inbar 2019 - Beyond a Cutting Edge: a Morpho-technological Analysis of Acheulian Handaxes and Cleavers from Gesher Benot Ya‘aqov, Israel
 
 ``` r
+library(rgl)
+library(Rvcg)
+library(Morpho)
+library(R.matlab)
+library(ggplot2)
+library(png)
+library(grid)
+library(gridExtra)
+
 # To run this code, first down load the zip file containing the 3D models from this page
 # https://osf.io/u3n9k/
 # Next, unzip the files to a folder called data.

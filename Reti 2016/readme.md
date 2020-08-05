@@ -1,5 +1,5 @@
 
-## Reti 2016
+## Reti 2016 - Quantifying Oldowan Stone Tool Production at Olduvai Gorge, Tanzania
 
 Reti (2016) published both an Oldowan archaeological data set and an
 experimental data set. This data set can be found on this [figshare
