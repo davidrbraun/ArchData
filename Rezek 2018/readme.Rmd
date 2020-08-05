@@ -1,0 +1,83 @@
+---
+output: github_document
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+
+## Rezek 2018 - Two million years of flaking stone and the evolutionary efficiency of stone tool technology
+
+@rezek_two_2018 published a large data set of flake measurements spanning the Oldowan to the Upper Paleolithic in their paper considering flake efficiency through time.  In the initial publication, there are some mistakes in the shared data (duplicate cases).  A revised data set and R code to make the figures in the paper were subsequenty published with a correction.  These can be found on this [zenodo page](https://zenodo.org/record/1408081#.XyhvEygzZWG) as a zip file.  We have used this code to make these examples.  To run the code examples given here, download this zip file and place its contents in a folder called data.
+
+```{r, load and clean the data}
+
+library(ggplot2)
+library(ggrepel)
+library(dplyr)
+library(magrittr)
+library(knitr)
+
+Flake_data = read.csv("data/Flake_data.csv", header = TRUE, sep = ',') %>%
+  rename(LENGTH = LENGTH..mm.,
+         WIDTH = WIDTH..mm.,
+         THICK = THICK..mm.,
+         PlatformWidth = Platform.Width..mm.,
+         PD = PD..mm.,
+         EPA = EPA..degree.,
+         MASS = MASS..g.)
+
+Summary_data = read.csv("data/Summary_data.csv", header = TRUE, sep = ',') %>%
+  rename(Median.PD = Median.PD..mm.,
+         Median.EPA = Median.EPA..degrees.)
+
+```
+
+The following figure shows the relationship between median platform depth and median exterior platform angle (EPA) for the studied assemblages.
+
+```{r example}
+
+p = ggplot(Summary_data, aes(x = Median.PD, y = Median.EPA, 
+                          color = PERIOD, 
+                          size = 10  ))
+p = p + geom_point(size = 2)
+p = p + coord_fixed(ratio = 0.25)
+p = p + scale_color_manual(name = "Period",
+                           values = c("royalblue1", "tomato", "mediumseagreen"),
+                           labels = c('Early\nPleistocene',
+                                      'Middle to\nmid-Late\nPleistocene',
+                                      'late Late\nPleistocene'))
+p = p + geom_text_repel(aes(label = ID), size = 3.5)
+p = p + labs(x = "Median platform depth (mm)",
+             y = "Median exterior platform angle (degrees)")
+p = p + xlim(1, 15) + ylim(55, 105) 
+p = p + theme_grey(20)
+p = p + theme(legend.text = element_text(size = 10),
+              legend.title = element_text(size = 12),
+              axis.text = element_text(size = 12),
+              axis.title = element_text(size = 14)) 
+p
+
+caption = paste(1:nrow(Summary_data), Summary_data$Assemblage.code, collapse = ', ')
+
+```
+
+Assemblage codes - `r caption`
+
+And here is a summary of the data set provided in this figure.
+
+```{r}
+
+kable(Flake_data %>% 
+      filter(!is.na(PD) & !is.na(EPA)) %>%
+      group_by(Assemblage.code) %>%   
+      summarize(N = n(),
+                MedianPD = median(PD),
+                MedianEPA = median(EPA)) )
+
+```
+
