@@ -22,11 +22,15 @@ library(dplyr)
 library(magrittr)
 library(knitr)
 
-cp_sites = read.csv("data/CP Sites.csv", header = TRUE, sep = ',')
+cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',')
+
+cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',')
 
 ```
 
 The following figure shows the relationship between median platform depth and median exterior platform angle (EPA) for the studied assemblages.
+
+_SHANNON IS THE TEXT ABOVE LEFT OVER?_
 
 ```{r example}
 
@@ -34,15 +38,66 @@ library(ggmap)
 library(ggrepel)
 library(raster)
 library(mapdata)
+library(ggplot2)
+library(dplyr)
+library(sf)
+library(raster)
+library(sp)
+library(tmap)
+library(automap)
+library(pander)
+library(ggrepel)
+library(rosm)
+library(rasterVis)
+library(RStoolbox)
+library(ggspatial)
+library(RColorBrewer)
+library(manipulate) # Included with RStudio
+library(lubridate)
 
 europe = raster('data/elevation9x9.tif')
 
-France.map = get_map(location = 'France', zoom = 6, maptype = 'terrain-background')
-cp_sites = na.omit(read.delim('data/CP Sites.txt', stringsAsFactors = FALSE, dec = '.', encoding = "UTF-8"))
-names(cp_sites)[1] = "Sitename"
 
-ggmap(France.map) + geom_point(data = cp_sites, aes(x=Longitude, y=Latitude),size=1.5, color = 'red') + geom_text_repel(data = cp_sites, aes(x = Longitude, y = Latitude, label = 1:nrow(cp_sites)), nudge_x = 0.05, size = 2.5) + xlab('Longitude') + ylab('Latitude') + ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
-caption = paste(1:nrow(cp_sites), cp_sites$Sitename, collapse = ', ')
+
+cp_sites1_sf<-st_as_sf(cp_sites1, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
+
+cp_sites2_sf<-st_as_sf(cp_sites2, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
+
+France.map = get_map(location = 'France', zoom = 6, maptype = 'terrain-background')
+
+#cp_sites = na.omit(read.delim('data/CP Sites.txt', stringsAsFactors = FALSE, dec = '.', encoding = "UTF-8"))
+
+names(cp_sites1_sf)[1] = "Sitename"
+names(cp_sites2_sf)[1] = "Sitename"
+
+cp_sites1_sf$Concerns=NA
+cp_sites_sf<-rbind(cp_sites1_sf,cp_sites2_sf)
+
+bgmap<-raster("data/bgmap.tif")
+
+
+map2<-ggplot()+
+ggRGB(bgmap, r=3, g=2, b=1, geom_raster=FALSE, ggObj=TRUE)+
+  geom_sf(data=cp_sites_sf)+
+  coord_sf()
+
+
+
+reubensmap1<-ggplot()+
+  ggR(europe, stretch="hist", ggLayer = TRUE, geom_raster=TRUE)+
+  scale_fill_gradientn(name="Altitude",colours = terrain.colors(300))
+
+
+reubensmap2<-ggplot()+
+  geom_sf(data=cp_sites_sf)+
+  ggrepel::geom_label_repel(data=cp_sites_sf, aes(label=Sitename, geometry=geometry), stat= "sf_coordinates", min.segment.length = 0, colour= "black",segment.colour="black",size=.8)+
+#  coord_sf()+
+  ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+
+
+
+#ggmap(France.map) + geom_point(data = cp_sites, aes(x=Longitude, y=Latitude),size=1.5, color = 'red') + geom_text_repel(data = cp_sites, aes(x = Longitude, y = Latitude, label = 1:nrow(cp_sites)), nudge_x = 0.05, size = 2.5) + xlab('Longitude') + ylab('Latitude') + ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+#caption = paste(1:nrow(cp_sites), cp_sites$Sitename, collapse = ', ')
 
 ```
 
