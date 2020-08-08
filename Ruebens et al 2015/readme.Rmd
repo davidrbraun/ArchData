@@ -1,0 +1,50 @@
+---
+output: github_document
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+
+## Ruebens, McPherron & Hublin 2015 - On the local Mousterian origin of the Châtelperronian: Integrating typo-technological, chronostratigraphic and contextual data
+
+In @ruebens_local_2015 we included summary data.
+
+```{r, load and clean the data}
+
+library(ggplot2)
+library(ggrepel)
+library(dplyr)
+library(magrittr)
+library(knitr)
+
+cp_sites = read.csv("data/CP Sites.csv", header = TRUE, sep = ',')
+
+```
+
+The following figure shows the relationship between median platform depth and median exterior platform angle (EPA) for the studied assemblages.
+
+```{r example}
+
+library(ggmap)
+library(ggrepel)
+library(raster)
+library(mapdata)
+
+europe = raster('data/elevation9x9.tif')
+
+France.map = get_map(location = 'France', zoom = 6, maptype = 'terrain-background')
+cp_sites = na.omit(read.delim('data/CP Sites.txt', stringsAsFactors = FALSE, dec = '.', encoding = "UTF-8"))
+names(cp_sites)[1] = "Sitename"
+
+ggmap(France.map) + geom_point(data = cp_sites, aes(x=Longitude, y=Latitude),size=1.5, color = 'red') + geom_text_repel(data = cp_sites, aes(x = Longitude, y = Latitude, label = 1:nrow(cp_sites)), nudge_x = 0.05, size = 2.5) + xlab('Longitude') + ylab('Latitude') + ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+caption = paste(1:nrow(cp_sites), cp_sites$Sitename, collapse = ', ')
+
+```
+
+Assemblage codes - `r caption`
+
