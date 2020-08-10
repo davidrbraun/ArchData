@@ -1,21 +1,9 @@
----
-output: github_document
-bibliography: bibliography.bib
----
-
-```{r setup, include=FALSE}
-
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-
-```
-
 
 ## Ruebens, McPherron & Hublin 2015 - On the local Mousterian origin of the Châtelperronian: Integrating typo-technological, chronostratigraphic and contextual data
 
-In @ruebens_local_2015 we included summary data.
+In Ruebens, McPherron, and Hublin (2015) we included summary data.
 
-```{r, load and clean the data}
-
+``` r
 library(ggplot2)
 library(ggrepel)
 library(dplyr)
@@ -25,11 +13,9 @@ library(knitr)
 cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',')
 
 cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',')
-
 ```
 
-```{r example}
-
+``` r
 #library(ggmap)
 #library(ggrepel)
 #library(raster)
@@ -45,11 +31,9 @@ library(RStoolbox)
 #library(RColorBrewer)
 #library(manipulate) # Included with RStudio
 #library(lubridate)
-
 ```
 
-```{r, various detials}
-
+``` r
 europe = raster('data/elevation9x9.tif')
 
 #need to make an ROI
@@ -69,21 +53,28 @@ cp_sites_sf<-rbind(cp_sites1_sf,cp_sites2_sf)
 #Now out put them as shapefiles
 
 st_write(cp_sites_sf,"Reubens_Sites.shp", append = FALSE)
+```
 
+    ## Deleting layer `Reubens_Sites' using driver `ESRI Shapefile'
+    ## Writing layer `Reubens_Sites' to data source `Reubens_Sites.shp' using driver `ESRI Shapefile'
+    ## Writing 46 features with 7 fields and geometry type Point.
+
+``` r
 #Read in ROI for Reubens map 
 
 ReubensROI<-st_read("data/Reubens_ROI.shp")
-
-
 ```
 
+    ## Reading layer `Reubens_ROI' from data source `C:\Users\mcpherro\mpiCloud\R\ArchData\Ruebens et al 2015\data\Reubens_ROI.shp' using driver `ESRI Shapefile'
+    ## Simple feature collection with 1 feature and 1 field
+    ## geometry type:  POLYGON
+    ## dimension:      XY
+    ## bbox:           xmin: -10.04696 ymin: 30.67512 xmax: 21.37523 ymax: 55.59026
+    ## CRS:            4326
 
 Load in maps and the distriubtuion of sites
 
-
-
-```{r, maps}
-
+``` r
 bgmap<-brick("data/bgmap.tif")
 
 reubensmap2<-ggplot()+
@@ -96,7 +87,11 @@ geom_sf(data=cp_sites_sf,size=1.5, color = 'red')+
   coord_sf()
   
 reubensmap2
+```
 
+![](readme_files/figure-gfm/maps-1.png)<!-- -->
+
+``` r
 reubensmap1<-ggplot()+
   ggR(europe, stretch="hist", ggLayer = TRUE, geom_raster=TRUE)+
   scale_fill_gradientn(name="Altitude",colours = terrain.colors(300))
@@ -106,6 +101,17 @@ reubensmap2<-ggplot()+
   ggrepel::geom_label_repel(data=cp_sites_sf, aes(label=Sitename, geometry=geometry), stat= "sf_coordinates", min.segment.length = 0, colour= "black",segment.colour="black",nudge_x = 0.05, size = 2.5)+
 #  coord_sf()+
   ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
-
 ```
 
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-ruebens_local_2015">
+
+Ruebens, Karen, Shannon JP McPherron, and Jean-Jacques Hublin. 2015. “On
+the Local Mousterian Origin of the Châtelperronian: Integrating
+Typo-Technological, Chronostratigraphic and Contextual Data.” *Journal
+of Human Evolution* 86: 55–91.
+
+</div>
+
+</div>
