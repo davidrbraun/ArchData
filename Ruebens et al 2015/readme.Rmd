@@ -104,7 +104,7 @@ bgmap<-brick("data/bgmap.tif")
 
 
 reubensmap2<-ggplot()+
-ggRGB(bgmap, r=3, g=2, b=1,  ggLayer = TRUE)+
+ggRGB(bgmap, r=1, g=2, b=3,  ggLayer = TRUE)+
   geom_sf(data=ReubensROI,color=NA,fill=NA)+
 geom_sf(data=cp_sites_sf,size=1.5, color = 'red')+
   ggrepel::geom_label_repel(data=cp_sites_sf, aes(label=Sitename, geometry=geometry), stat= "sf_coordinates", min.segment.length = 0, colour= "black",segment.colour="black",label.size = 0.4,nudge_x = 0.5, size = 1.7, segment.alpha = .5,point.padding = .3)+
