@@ -12,100 +12,90 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Ruebens, McPherron & Hublin 2015 - On the local Mousterian origin of the Châtelperronian: Integrating typo-technological, chronostratigraphic and contextual data
 
-In @ruebens_local_2015 we included summary data.
+In @ruebens_local_2015 we included in the Supplementary Information a spreadsheet of summary data on Châtelperronian sites.  Here we show what some of those data look like by plotting the category 1 and 2 sites and listing some of the data.
 
-```{r, load and clean the data}
+```{r, load libraries and the data}
 
 library(ggplot2)
 library(ggrepel)
 library(dplyr)
 library(magrittr)
 library(knitr)
-
-cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',')
-
-cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',')
-
-```
-
-```{r example}
-
-#library(ggmap)
-#library(ggrepel)
-#library(raster)
-#library(mapdata)
-library(ggplot2)
-library(dplyr)
 library(sf)
 library(raster)
-#library(sp)
-#library(pander)
-library(ggrepel)
 library(RStoolbox)
-#library(RColorBrewer)
-#library(manipulate) # Included with RStudio
-#library(lubridate)
+
+# These CSV files are tabs one and two from the spreadsheet in the SI
+# of Ruebens et al. 2015.  Some columns, like sitename, have names that need 
+# to be corrected.
+cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',') %>%
+  rename(Sitename = 'ï..Site.name')
+cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',') %>%
+  rename(Sitename = 'ï..Site.name')
 
 ```
 
-```{r, various detials}
 
-europe = raster('data/elevation9x9.tif')
+```{r, prep the data}
 
-#need to make an ROI
-#Take the sites and creata square around it
-#Load the sites and make them to sf objects 
-cp_sites1_sf<-st_as_sf(cp_sites1, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
+# Need to make an ROI
+# Take the sites and create square around it
+# Load the sites and make them to sf objects 
+cp_sites1_sf <- st_as_sf(cp_sites1, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
+cp_sites2_sf <- st_as_sf(cp_sites2, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
 
-cp_sites2_sf<-st_as_sf(cp_sites2, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
+# Add this field so that both dataframes have the same columns
+cp_sites1_sf$Concerns = NA
 
+# Row bind them into one dataframe
+cp_sites_sf <- rbind(cp_sites1_sf, cp_sites2_sf)
 
-names(cp_sites1_sf)[1] = "Sitename"
-names(cp_sites2_sf)[1] = "Sitename"
+# And save it as a shapefile
+st_write(cp_sites_sf, "data/Reubens_Sites.shp", append = FALSE)
 
-cp_sites1_sf$Concerns=NA
-cp_sites_sf<-rbind(cp_sites1_sf,cp_sites2_sf)
-
-#Now out put them as shapefiles
-
-st_write(cp_sites_sf,"Reubens_Sites.shp", append = FALSE)
-
-#Read in ROI for Reubens map 
-
+# Read the ROI for Reubens map 
 ReubensROI<-st_read("data/Reubens_ROI.shp")
 
+```
+
+Here is a map of all Category 1 (Châtelperronian sites with good contextual information) and Category 2 (Châtelperronian sites needing some better contextual information) sites considered in @ruebens_local_2015.
+
+```{r map}
+
+bgmap <- brick("data/bgmap.tif")
+
+map <- ggplot()
+map = map + ggRGB(bgmap, r = 1, g = 2, b = 3,  ggLayer = TRUE)
+map = map + geom_sf(data = ReubensROI, color = NA, fill = NA)
+map = map + geom_sf(data = cp_sites_sf, size = 1.5, color = 'red')
+map = map + ggrepel::geom_label_repel(data = cp_sites_sf,
+                                      aes(label = Sitename, geometry = geometry),
+                                      stat = "sf_coordinates", min.segment.length = 0,
+                                      colour = "black", segment.colour = "black",
+                                      label.size = 0.2, nudge_x = 0.5, size = 1,
+                                      segment.alpha = .5, point.padding = .1,
+                                      label.padding = .1)
+map = map + ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+map = map + xlab('Longitude') + ylab('Latitude')
+map = map + coord_sf()
+map 
+
+```
+
+Here are two views on the data themselves.  First the Category 1 sites.
+
+```{r}
+
+kable(cp_sites1_sf)
 
 ```
 
 
-Load in maps and the distriubtuion of sites
+And the Category 2 sites.
 
+```{r}
 
-
-```{r, maps}
-
-bgmap<-brick("data/bgmap.tif")
-
-reubensmap2<-ggplot()+
-ggRGB(bgmap, r=1, g=2, b=3,  ggLayer = TRUE)+
-  geom_sf(data=ReubensROI,color=NA,fill=NA)+
-geom_sf(data=cp_sites_sf,size=1.5, color = 'red')+
-  ggrepel::geom_label_repel(data=cp_sites_sf, aes(label=Sitename, geometry=geometry), stat= "sf_coordinates", min.segment.length = 0, colour= "black",segment.colour="black",label.size = 0.4,nudge_x = 0.5, size = 1.7, segment.alpha = .5,point.padding = .3)+
-   ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')+
-   xlab('Longitude') + ylab('Latitude')+
-  coord_sf()
-  
-reubensmap2
-
-reubensmap1<-ggplot()+
-  ggR(europe, stretch="hist", ggLayer = TRUE, geom_raster=TRUE)+
-  scale_fill_gradientn(name="Altitude",colours = terrain.colors(300))
-
-reubensmap2<-ggplot()+
-  geom_sf(data=cp_sites_sf)+
-  ggrepel::geom_label_repel(data=cp_sites_sf, aes(label=Sitename, geometry=geometry), stat= "sf_coordinates", min.segment.length = 0, colour= "black",segment.colour="black",nudge_x = 0.05, size = 2.5)+
-#  coord_sf()+
-  ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+kable(cp_sites1_sf)
 
 ```
 
