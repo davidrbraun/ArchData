@@ -24,14 +24,14 @@ library(knitr)
 library(sf)
 library(raster)
 library(RStoolbox)
+library(leaflet)
 
 # These CSV files are tabs one and two from the spreadsheet in the SI
 # of Ruebens et al. 2015.  Some columns, like sitename, have names that need 
 # to be corrected.
-cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',') %>%
-  rename(Sitename = 'ï..Site.name')
+cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',')%>%rename(Sitename = 'Site.name')
 cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',') %>%
-  rename(Sitename = 'ï..Site.name')
+  rename(Sitename = 'Site.name')
 
 ```
 
@@ -57,6 +57,16 @@ st_write(cp_sites_sf, "data/Reubens_Sites.shp", append = FALSE)
 ReubensROI<-st_read("data/Reubens_ROI.shp")
 
 ```
+
+
+
+```{r, leaflet version, echo=F}
+
+m<-leaflet() %>% addTiles %>% addMarkers(data=cp_sites1_sf)
+
+m
+```
+
 
 Here is a map of all Category 1 (Châtelperronian sites with good contextual information) and Category 2 (Châtelperronian sites needing some better contextual information) sites considered in @ruebens_local_2015.
 
