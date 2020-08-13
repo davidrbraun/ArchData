@@ -1,6 +1,7 @@
 ---
 output: github_document
 bibliography: bibliography.bib
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -26,6 +27,7 @@ library(raster)
 library(RStoolbox)
 library(leaflet)
 library(maptools)
+webshot::install_phantomjs(force = TRUE)
 
 # These CSV files are tabs one and two from the spreadsheet in the SI
 # of Ruebens et al. 2015.  Some columns, like sitename, have names that need 
@@ -59,9 +61,9 @@ ReubensROI<-st_read("data/Reubens_ROI.shp")
 
 ```
 
+#Leaflet version of the map
 
-
-```{r, leaflet version, echo=F}
+```{r, leaflet version}
 
 htmltitle <- "<h5> Reubens 2015 Archaeological Sites </h5>"
 
