@@ -25,6 +25,7 @@ library(sf)
 library(raster)
 library(RStoolbox)
 library(leaflet)
+library(maptools)
 
 # These CSV files are tabs one and two from the spreadsheet in the SI
 # of Ruebens et al. 2015.  Some columns, like sitename, have names that need 
@@ -62,9 +63,28 @@ ReubensROI<-st_read("data/Reubens_ROI.shp")
 
 ```{r, leaflet version, echo=F}
 
-m<-leaflet() %>% addTiles %>% addMarkers(data=cp_sites1_sf, popup = ~Sitename)
+htmltitle <- "<h5> Reubens 2015 Archaeological Sites </h5>"
 
+mylabels <- paste(
+  "Site Name: ", cp_sites_sf$Sitename, "<br/>",
+  "Region: ", cp_sites_sf$Region, "<br/>",
+  "Location: ", cp_sites_sf$Concerns) %>%lapply(htmltools::HTML)
+
+
+m<-leaflet() %>% addTiles %>% addMarkers(data=cp_sites1_sf, popup = ~Sitename,label=mylabels,labelOptions = labelOptions( 
+      style = list("font-weight" = "normal", padding = "3px 8px"), 
+      textsize = "13px", 
+      direction = "auto"))%>%
+  addControl(html=htmltitle, position = "topright")
+  
 m
+
+
+
+
+
+
+
 ```
 
 
