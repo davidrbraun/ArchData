@@ -62,7 +62,7 @@ ReubensROI<-st_read("data/Reubens_ROI.shp")
 
 ```{r, leaflet version, echo=F}
 
-m<-leaflet() %>% addTiles %>% addMarkers(data=cp_sites1_sf)
+m<-leaflet() %>% addTiles %>% addMarkers(data=cp_sites1_sf, popup = ~Sitename)
 
 m
 ```
