@@ -17,6 +17,8 @@ library(raster)
 library(RStoolbox)
 library(leaflet)
 library(maptools)
+library(ggspatial)
+library(ggmap)
 webshot::install_phantomjs(force = TRUE)
 
 # These CSV files are tabs one and two from the spreadsheet in the SI
@@ -102,6 +104,10 @@ map = map + ggrepel::geom_label_repel(data = cp_sites_sf,
                                       segment.alpha = .5, point.padding = .1,
                                       label.padding = .1)
 map = map + ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+map = map + annotation_scale(location = "bl", width_hint = 0.5) 
+map = map + annotation_north_arrow(location = "br", which_north = "true", 
+        pad_x = unit(0.25, "in"), pad_y = unit(0.3, "in"),
+        style = north_arrow_fancy_orienteering)
 map = map + xlab('Longitude') + ylab('Latitude')
 map = map + coord_sf()
 map 
@@ -158,6 +164,14 @@ kable(cp_sites1_sf)
 | Les Tambourets       | Couladère              | Haute Garonne        | collected by Méroc in 1963, excavated 1973, 1975, 1980 by Bricker and Alaux    | open-air    | Bricker and Laville, 1977; Bricker, 2014         | c(1.099, 43.201)  | NA       |
 | Roc-de-Combe         | Nadaillac              | Lot                  | excavated 1959 by Labrot, and 1966 by F. Bordes                                | cave        | Bordes and Labrot, 1967; Sonneville-Bordes, 2002 | c(1.333, 44.767)  | NA       |
 | Vieux Coutets        | Creysse                | Dordogne             | large-scale rescue excavation in 2003                                          | open-air    | Grigoletto et al., 2008                          | c(0.568, 44.864)  | NA       |
+
+# To see this map in google view this file as a kml on google earth
+
+``` r
+cp_sites_sp<-as(cp_sites_sf, "Spatial")
+
+kmlPoints(cp_sites_sp,kmlfile = "Reubens_map.kml", kmlname="Reubens_map",icon="http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png", name=paste(cp_sites_sp$Sitename), description = paste(cp_sites_sp$Concerns))
+```
 
 <div id="refs" class="references">
 
