@@ -77,8 +77,11 @@ htmltitle <- "<h5> Reubens 2015 Archaeological Sites </h5>"
 
 mylabels <- paste(
   "Site Name: ", cp_sites_sf$Sitename, "<br/>",
+  "Community: ", cp_sites_sf$Community, "<br/>",
   "Region: ", cp_sites_sf$Region, "<br/>",
-  "Location: ", cp_sites_sf$Concerns) %>% lapply(htmltools::HTML)
+  "Location: ", cp_sites_sf$Location, "<br/>",
+  "Information: ", cp_sites_sf$`Contextual information`, "<br/>",
+  "References: ", cp_sites_sf$`Key References`) %>% lapply(htmltools::HTML)
 
 m <- leaflet() %>%
       addTiles %>%
