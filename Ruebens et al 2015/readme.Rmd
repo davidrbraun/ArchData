@@ -93,11 +93,11 @@ m
 
 ```
 
-The following code saves the HTML code from the Leafet map.  You can view the [dynamic map here](LeafletMap/index.html).
+The following code saves the HTML code from the Leafet map.  You can view the [dynamic map here](docs/index.html).
 
 ```{r}
 
-mapshot(m, 'LeafletMap/index.html')
+mapshot(m, 'docs/index.html')
 
 ```
 
