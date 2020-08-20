@@ -46,7 +46,12 @@ cp_sites1 = read_excel('data/Ruebens et al 2015.xlsx', sheet = 2, skip = 1) %>%
 cp_sites2 = read_excel('data/Ruebens et al 2015.xlsx', sheet = 3, skip = 1) %>%
   rename(Sitename = 'Site name') %>%
   drop_na()
-  
+
+# In the Ruebens et al. 2015 publication, the site of Labeko Koba has the wrong coordinates.
+# These are fixed here.
+cp_sites2$Long.[cp_sites2$Sitename == 'Labeko-Koba'] = -2.458
+cp_sites2$Lat.[cp_sites2$Sitename == 'Labeko-Koba'] = 43.066
+
 ```
 
 
