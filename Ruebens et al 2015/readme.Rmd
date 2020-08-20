@@ -93,7 +93,7 @@ m
 
 ```
 
-The following code saves the HTML code from the Leafet map.  You can view the [dynamic map here](docs/index.html).
+The following code saves the HTML code from the Leafet map.  You can view the [dynamic map here](https://davidrbraun.github.io/ArchData/index.html).
 
 ```{r}
 

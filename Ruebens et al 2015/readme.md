@@ -95,10 +95,11 @@ m
 ![](readme_files/figure-gfm/leaflet%20version-1.png)<!-- -->
 
 The following code saves the HTML code from the Leafet map. You can view
-the [dynamic map here](LeafletMap/index.html).
+the [dynamic map
+here](https://davidrbraun.github.io/ArchData/index.html).
 
 ``` r
-mapshot(m, 'LeafletMap/index.html')
+mapshot(m, 'docs/index.html')
 ```
 
 Here is a static map of all Category 1 (Châtelperronian sites with good
