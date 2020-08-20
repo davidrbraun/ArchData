@@ -85,7 +85,7 @@ mylabels <- paste(
 
 m <- leaflet() %>%
       addTiles %>%
-      addMarkers(data = cp_sites1_sf,
+      addMarkers(data = cp_sites_sf,
                   popup = ~Sitename,
                   label = mylabels,
                   labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"), 
