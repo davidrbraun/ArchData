@@ -73,7 +73,7 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>La CÃ´te</name>
+  <name>La Côte</name>
   <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
@@ -93,7 +93,7 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>La-Roche-Ã -Pierrot</name>
+  <name>La-Roche-à-Pierrot</name>
   <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
@@ -103,7 +103,7 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Le BastÃ©</name>
+  <name>Le Basté</name>
   <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
@@ -113,7 +113,7 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Le Trou de la ChÃ¨vre</name>
+  <name>Le Trou de la Chèvre</name>
   <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
@@ -123,7 +123,7 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Les CottÃ©s</name>
+  <name>Les Cottés</name>
   <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
@@ -164,7 +164,7 @@
 </Placemark>
 <Placemark>
   <name>Barbas III</name>
-  <description><![CDATA[Currently largely unpublished:]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -174,7 +174,7 @@
 </Placemark>
 <Placemark>
   <name>Canaule - La Ferme</name>
-  <description><![CDATA[Currently largely unpublished:]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -184,7 +184,7 @@
 </Placemark>
 <Placemark>
   <name>Grotte XVI</name>
-  <description><![CDATA[Currently largely unpublished:]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -194,7 +194,7 @@
 </Placemark>
 <Placemark>
   <name>Les Bossats</name>
-  <description><![CDATA[Currently largely unpublished:]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -204,7 +204,7 @@
 </Placemark>
 <Placemark>
   <name>Les Rigoux</name>
-  <description><![CDATA[Currently largely unpublished:]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -214,7 +214,7 @@
 </Placemark>
 <Placemark>
   <name>Ekain</name>
-  <description><![CDATA[Small Assemblages ]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -224,7 +224,7 @@
 </Placemark>
 <Placemark>
   <name>Font-de-Gaume</name>
-  <description><![CDATA[Small Assemblages ]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -234,7 +234,7 @@
 </Placemark>
 <Placemark>
   <name>Labeko-Koba</name>
-  <description><![CDATA[Small Assemblages ]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -244,7 +244,7 @@
 </Placemark>
 <Placemark>
   <name>La Chapelle-aux-Saints</name>
-  <description><![CDATA[Small Assemblages ]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -254,7 +254,7 @@
 </Placemark>
 <Placemark>
   <name>Abri du Chasseur</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -264,7 +264,7 @@
 </Placemark>
 <Placemark>
   <name>Abri-du-Pas-Estret</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -274,7 +274,7 @@
 </Placemark>
 <Placemark>
   <name>Fontenioux</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -284,7 +284,7 @@
 </Placemark>
 <Placemark>
   <name>Germolles</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -293,8 +293,8 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Grotte des FÃ©es</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <name>Grotte des Fées</name>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -304,7 +304,7 @@
 </Placemark>
 <Placemark>
   <name>Laussel</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -314,7 +314,7 @@
 </Placemark>
 <Placemark>
   <name>Pair-non-Pair</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -324,7 +324,7 @@
 </Placemark>
 <Placemark>
   <name>Roc-de-Combe-Capelle</name>
-  <description><![CDATA[Old Excavations]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -334,7 +334,7 @@
 </Placemark>
 <Placemark>
   <name>Abri Bordes-Fitte</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -343,18 +343,18 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Abri Dubalen </name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <name>Abri Dubalen</name>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
--0.7,43.633
+-0.7,43.633331
     </coordinates>
   </Point>
 </Placemark>
 <Placemark>
   <name>Aranbaltza</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -364,7 +364,7 @@
 </Placemark>
 <Placemark>
   <name>Belle Roche</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -374,7 +374,7 @@
 </Placemark>
 <Placemark>
   <name>Bos-del-Ser</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -383,8 +383,8 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Combe-SauniÃ¨re</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <name>Combe-Saunière</name>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -394,7 +394,7 @@
 </Placemark>
 <Placemark>
   <name>Cueva del Pendo</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -403,8 +403,8 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>FontÃ©chevade</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <name>Fontéchevade</name>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -413,8 +413,8 @@
   </Point>
 </Placemark>
 <Placemark>
-  <name>Grotte des HyÃ¨nes</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <name>Grotte des Hyènes</name>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -424,7 +424,7 @@
 </Placemark>
 <Placemark>
   <name>La Ferrassie</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -434,7 +434,7 @@
 </Placemark>
 <Placemark>
   <name>La Quina - Aval</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -444,7 +444,7 @@
 </Placemark>
 <Placemark>
   <name>La Tour Fondue</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -454,7 +454,7 @@
 </Placemark>
 <Placemark>
   <name>Le Piage</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>
@@ -464,7 +464,7 @@
 </Placemark>
 <Placemark>
   <name>Rachat</name>
-  <description><![CDATA[Taphonomic Issues]]></description>
+  <description><![CDATA[NA]]></description>
   <styleUrl>#style1</styleUrl>
   <Point>
     <coordinates>

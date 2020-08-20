@@ -20,7 +20,9 @@ In @ruebens_local_2015 we included in the Supplementary Information a spreadshee
 library(ggplot2)
 library(ggrepel)
 library(dplyr)
+library(tidyr)
 library(magrittr)
+library(readxl)
 library(knitr)
 library(sf)
 library(raster)
@@ -29,15 +31,22 @@ library(leaflet)
 library(maptools)
 library(ggspatial)
 library(ggmap)
+library(mapview)
+library(tiff)
+library(rgdal)
+
 webshot::install_phantomjs(force = TRUE)
 
 # These CSV files are tabs one and two from the spreadsheet in the SI
 # of Ruebens et al. 2015.  Some columns, like sitename, have names that need 
 # to be corrected.
-cp_sites1 = read.csv("data/Reubens_Category_1.csv", header = TRUE, sep = ',')%>%rename(Sitename = 'Site.name')
-cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',') %>%
-  rename(Sitename = 'Site.name')
+cp_sites1 = read_excel('data/Ruebens et al 2015.xlsx', sheet = 2, skip = 1) %>%
+  rename(Sitename = 'Site name')
 
+cp_sites2 = read_excel('data/Ruebens et al 2015.xlsx', sheet = 3, skip = 1) %>%
+  rename(Sitename = 'Site name') %>%
+  drop_na()
+  
 ```
 
 
@@ -48,9 +57,6 @@ cp_sites2 = read.csv("data/Reubens_Category_2.csv", header = TRUE, sep = ',') %>
 # Load the sites and make them to sf objects 
 cp_sites1_sf <- st_as_sf(cp_sites1, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
 cp_sites2_sf <- st_as_sf(cp_sites2, coords = c("Long.", "Lat."), crs = 4326, agr = "constant")
-
-# Add this field so that both dataframes have the same columns
-cp_sites1_sf$Concerns = NA
 
 # Row bind them into one dataframe
 cp_sites_sf <- rbind(cp_sites1_sf, cp_sites2_sf)
@@ -63,7 +69,7 @@ ReubensROI<-st_read("data/Reubens_ROI.shp")
 
 ```
 
-#Leaflet version of the map
+Here is a Leaflet version of the map.  When rendered within rStudio this produces a dynamic map that can be zoomed and where each data point shows all of the data attached to that point.
 
 ```{r, leaflet version}
 
@@ -72,34 +78,79 @@ htmltitle <- "<h5> Reubens 2015 Archaeological Sites </h5>"
 mylabels <- paste(
   "Site Name: ", cp_sites_sf$Sitename, "<br/>",
   "Region: ", cp_sites_sf$Region, "<br/>",
-  "Location: ", cp_sites_sf$Concerns) %>%lapply(htmltools::HTML)
+  "Location: ", cp_sites_sf$Concerns) %>% lapply(htmltools::HTML)
 
-
-m<-leaflet() %>% addTiles %>% addMarkers(data=cp_sites1_sf, popup = ~Sitename,label=mylabels,labelOptions = labelOptions( 
-      style = list("font-weight" = "normal", padding = "3px 8px"), 
-      textsize = "13px", 
-      direction = "auto"))%>%
-  addControl(html=htmltitle, position = "topright")
+m <- leaflet() %>%
+      addTiles %>%
+      addMarkers(data = cp_sites1_sf,
+                  popup = ~Sitename,
+                  label = mylabels,
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"), 
+                                              textsize = "13px", direction = "auto")) %>%
+      addControl(html=htmltitle, position = "topright")
   
 m
 
+```
 
+The following code saves the HTML code from the Leafet map.  You can view the [dynamic map here](LeafletMap/index.html).
 
+```{r}
 
-
-
+mapshot(m, 'LeafletMap/index.html')
 
 ```
 
+Here is a static map of all Category 1 (Châtelperronian sites with good contextual information) and Category 2 (Châtelperronian sites needing some better contextual information) sites considered in @ruebens_local_2015.
 
-Here is a map of all Category 1 (Châtelperronian sites with good contextual information) and Category 2 (Châtelperronian sites needing some better contextual information) sites considered in @ruebens_local_2015.
+```{r map_version1, dpi = 600}
 
-```{r map}
-
+# Download this base map from https://www.naturalearthdata.com/downloads/
+# Here we also used qGIS to clip the map to the area of Europe we are interested in,
+# and saved it as a geoTIFF called bgmap.tif
 bgmap <- brick("data/bgmap.tif")
 
 map <- ggplot()
 map = map + ggRGB(bgmap, r = 1, g = 2, b = 3,  ggLayer = TRUE)
+map = map + geom_sf(data = ReubensROI, color = NA, fill = NA)
+map = map + geom_sf(data = cp_sites_sf, size = 1.5, color = 'red')
+map = map + ggrepel::geom_label_repel(data = cp_sites_sf,
+                                      aes(label = Sitename, geometry = geometry),
+                                      stat = "sf_coordinates", min.segment.length = 0,
+                                      colour = "black", segment.colour = "black",
+                                      label.size = 0.2, nudge_x = 0.5, size = 1,
+                                      segment.alpha = .5, point.padding = .1,
+                                      label.padding = .1)
+map = map + ggtitle('Châtelperronian Sites', subtitle = 'Data from Ruebens et al. 2015')
+map = map + annotation_scale(location = "bl", width_hint = 0.5) 
+map = map + annotation_north_arrow(location = "br", which_north = "true", 
+        pad_x = unit(0.25, "in"), pad_y = unit(0.3, "in"),
+        style = north_arrow_fancy_orienteering)
+map = map + xlab('Longitude') + ylab('Latitude')
+map = map + coord_sf()
+map 
+
+```
+
+And here is another way of making that same map.  This version better preserves the resolution of the underlying base map.
+
+```{r map_version2, dpi = 600}
+
+# Download this base map from https://www.naturalearthdata.com/downloads/
+# Here we also used qGIS to clip the map to the area of Europe we are interested in,
+# and saved it as a geoTIFF called bgmap.tif.  You can likely make this map without first clipping it.
+
+# The first line loads the map as a raster dataset.
+# The second line reads the spatial limits of the map.
+bgmap = as.raster(readTIFF("data/bgmap.tif", native = TRUE, convert = TRUE))
+bgmap_limits = readGDAL('data/bgmap.tif')@bbox
+
+map <- ggplot()
+map = map + annotation_raster(bgmap,
+                          xmin = bgmap_limits[1,1],
+                          xmax = bgmap_limits[1,2],
+                          ymin = bgmap_limits[2,1],
+                          ymax = bgmap_limits[2,2]) 
 map = map + geom_sf(data = ReubensROI, color = NA, fill = NA)
 map = map + geom_sf(data = cp_sites_sf, size = 1.5, color = 'red')
 map = map + ggrepel::geom_label_repel(data = cp_sites_sf,
@@ -128,7 +179,6 @@ kable(cp_sites1_sf)
 
 ```
 
-
 And the Category 2 sites.
 
 ```{r}
@@ -137,14 +187,13 @@ kable(cp_sites1_sf)
 
 ```
 
-# To see this map in google view this file as a kml on google earth
+To see this map in google view this file as a kml on google earth
 
 ```{r, google earth}
 
 cp_sites_sp<-as(cp_sites_sf, "Spatial")
 
 kmlPoints(cp_sites_sp,kmlfile = "Reubens_map.kml", kmlname="Reubens_map",icon="http://www.gstatic.com/mapspro/images/stock/962-wht-diamond-blank.png", name=paste(cp_sites_sp$Sitename), description = paste(cp_sites_sp$Concerns))
-
 
 
 ```
