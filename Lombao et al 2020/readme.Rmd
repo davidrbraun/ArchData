@@ -1,0 +1,72 @@
+---
+output: github_document
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+
+## Lombao et al. 2020 - A new approach to measure reduction intensity on cores and tools on cobbles: The Volumetric Reconstruction Method
+
+In this paper on quantifying core reduction intensity, @lombao_new_2020 [posted here] (https://zenodo.org/record/3368659#.X0TENcgzZJJ) a another large set (N = 128) of 3D scans of 64 blanks and 64 cores/handaxes (see also @lombao_effects_2019).  Also included is a spreadsheet of attribute data.
+
+```{r download_xls_data}
+
+library(httr)
+library(ggplot2)
+library(readxl)
+library(magrittr)
+library(dplyr)
+library(knitr)
+
+# Check to see if the file exists locally already, 
+# and if not, download it from the Zenodo website.
+# This extra step is not necessary, but it is a nice
+# trick to know for when datasets are often updated
+# on a website, and it saves download time when testing
+# code.
+if (!file.exists('data/Lombao_2020.rds')) {
+  url = "https://zenodo.org/record/3368659/files/VRM%20experiment%20database.xlsx?download=1"
+  GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
+  Lombao_2020 = read_excel(tf, sheet = 1, skip = 0) 
+  saveRDS(Lombao_2020, 'data/Lombao_2020.rds') 
+} else {
+  Lombao_2020 = readRDS('data/Lombao_2020.rds')
+}
+
+# Rename the columns to make them more R friendly
+Lombao_2020 = Lombao_2020 %>%
+  rename(Original_mass = 'Original mass (mm)') %>%
+  rename(Original_surface = 'Original surface (mm2)') %>%
+  rename(Original_volume = 'Original volume (mm3)') %>%
+  rename(Mass_FTh = 'Mean FTh (Flake thickness) (mm)') %>%
+  rename(Scar_generations_1 = 'Scar generations...15') %>%
+  rename(Thickness = 'Thickness (mm)') %>%
+  rename(Mean_PTh_1 = 'Mean PTh (Platform thickness) (mm)...13') %>%
+  rename(Scar_generations_2 = 'Scar generations...12') %>%
+  rename(Width = 'Width (mm)') %>%
+  rename(Mean_PTh_2 = 'Mean PTh (Platform thickness) (mm)...10') %>%
+  rename(Scar_generations_3 = 'Scar generations...9') %>%
+  rename(Length = 'Length (mm)') %>%
+  rename(Surface = 'Surface (mm2)') %>%
+  rename(Final_volume = 'Final volume (mm3)') %>%
+  rename(Final_mass = 'Final mass (g)') %>%
+  rename(Reduction_strategy = 'Reduction strategy') %>%
+  rename(Core_label = 'Core Label') %>%
+  rename(Blank_label = 'Blank label')
+```
+
+A view on the attribute data.
+
+```{r}
+
+kable(Lombao_2020)
+
+```
+
+
+
