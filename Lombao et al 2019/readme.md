@@ -2,9 +2,9 @@
 ## Lombao et al. 2019 - The effects of blank size and knapping strategy on the estimation of core’s reduction intensity
 
 In their paper on quantifying core reduction intensity, Lombao et al.
-(2019 posted here) (<https://zenodo.org/record/2585423#.X0TC18gzZJJ>) a
-large set of 3D scans of 30 cobbles and cores from various stages of
-reduction (290 scans in total).
+(2019) posted a large set of 3D scans of 30 cobbles and cores from
+various stages of reduction ([290 scans in
+total](https://zenodo.org/record/2585423#.X0TC18gzZJJ)).
 
 \[Example to follow\]
 

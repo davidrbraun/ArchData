@@ -2,10 +2,10 @@
 ## Lombao et al. 2020 - A new approach to measure reduction intensity on cores and tools on cobbles: The Volumetric Reconstruction Method
 
 In this paper on quantifying core reduction intensity, Lombao et al.
-(2020 posted here) (<https://zenodo.org/record/3368659#.X0TENcgzZJJ>) a
-another large set (N = 128) of 3D scans of 64 blanks and 64
-cores/handaxes (see also Lombao et al. (2019)). Also included is a
-spreadsheet of attribute data.
+(2020) posted a [another large
+set](https://zenodo.org/record/3368659#.X0TENcgzZJJ) (N = 128) of 3D
+scans of 64 blanks and 64 cores/handaxes (see also Lombao et al.
+(2019)). Also included is a spreadsheet of attribute data.
 
 ``` r
 library(httr)
