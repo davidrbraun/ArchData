@@ -1,0 +1,39 @@
+---
+output: github_document
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+## Grove and Blinkhorn 2020 - Neural networks differentiate between Middle and Later Stone Age lithic assemblages in eastern Africa
+
+In their paper, @grove_neural_2020 use neural networks on a dataset of 92 Middle and Later Stone Age assemblages from east Africa.  They publish a dataset of presence/absence data for typological categories for these assemblages, and the code to analyze it and reproduce the results.  
+
+Here we download the raw data and display it.  The complete paper with data and code is open access and can be [found here](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0237528).
+
+```{r load_data}
+
+library(httr)
+library(readxl)
+library(knitr)
+
+if (!file.exists('data/grove_blinkhorn_2020.rds')) {
+  url = "https://doi.org/10.1371/journal.pone.0237528.s002"
+  GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
+  grove_blinkhorn_2020 = read_excel(tf)
+  saveRDS(grove_blinkhorn_2020, 'data/grove_blinkhorn_2020.RDS') 
+} else {
+  grove_blinkhorn_2020 = readRDS('data/grove_blinkhorn_2020.RDS')
+}
+
+```
+
+```{r}
+
+kable(grove_blinkhorn_2020)
+
+```
