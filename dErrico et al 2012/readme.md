@@ -105,7 +105,7 @@ m
 
 The following code saves the HTML code from the Leaflet map. You can
 view the [dynamic map
-here](https://davidrbraun.github.io/ArchData/derrico.html).
+here](https://davidrbraun.github.io/ArchData/index.html).
 
 ``` r
 mapshot(m, 'leaflet/index.html')
